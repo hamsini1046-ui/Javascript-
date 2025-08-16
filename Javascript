@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .student {
+            background: #e8f0fe;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        .student h3 {
+            margin: 0;
+            color: #007BFF;
+        }
+        .student p {
+            margin: 5px 0 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Student Management System</h1>
+    <div class="container" id="studentList"></div>
+
+    <script>
+        // ===== Variables =====
+        let schoolName = "Greenwood High School";
+        let totalStudents = 0;
+
+        // ===== Arrays =====
+        let students = []; // Will store student objects
+
+        // ===== Functions =====
+        function addStudent(name, age, grades) {
+            // ===== Objects =====
+            let student = {
+                name: name,
+                age: age,
+                grades: grades,
+                getAverageGrade: function () {
+                    let sum = 0;
+                    // ===== Loops (for loop) =====
+                    for (let i = 0; i < this.grades.length; i++) {
+                        sum += this.grades[i];
+                    }
+                    return sum / this.grades.length;
+                }
+            };
+
+            students.push(student);
+            totalStudents++;
+        }
+
+        // ===== Adding some students =====
+        addStudent("Alice", 15, [85, 90, 78]);
+        addStudent("Bob", 16, [92, 88, 95]);
+        addStudent("Charlie", 15, [70, 75, 80]);
+
+        // ===== Display students in HTML =====
+        let studentListDiv = document.getElementById("studentList");
+
+        studentListDiv.innerHTML += `<h2>Welcome to ${schoolName}</h2>`;
+        studentListDiv.innerHTML += `<p>Total Students: ${totalStudents}</p>`;
+        studentListDiv.innerHTML += `<h3>Student Details:</h3>`;
+
+        for (let i = 0; i < students.length; i++) {
+            let student = students[i];
+            studentListDiv.innerHTML += `
+                <div class="student">
+                    <h3>${student.name}</h3>
+                    <p>Age: ${student.age}</p>
+                    <p>Average Grade: ${student.getAverageGrade()}</p>
+                </div>
+            `;
+        }
+    </script>
+
+</body>
+</html>
